@@ -70,7 +70,7 @@ local tweenInfo = TweenInfo.new(
 	_G.farmsp, -- Time
 	Enum.EasingStyle.Linear, -- EasingStyle
 	Enum.EasingDirection.Out, -- EasingDirection
-	0, -- RepeatCount (when less than zero the tween will loop indefinitely)
+	_G.famount, -- RepeatCount (when less than zero the tween will loop indefinitely)
 	false, -- Reverses (tween will reverse once reaching it's goal)
 	0 -- DelayTime
 )
@@ -132,7 +132,7 @@ Page.Slider({
 Page2.Slider({
     Text = "Farm Amount (rec max for overnight grinding)",
     Callback = function(value)
-    game.Players.LocalPlayer.Character.Humanoid.JumpPower = value
+    _G.famount = value
     end,
     Min = 1,
     Max = 100000000000000000000,
