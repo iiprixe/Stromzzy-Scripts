@@ -124,11 +124,20 @@ Page.Slider({
     Callback = function(value)
     _G.farmsp = value
     end,
-    Min = 1,
+    Min = 0,
     Max = 10,
-    Def = 1
+    Def = 0
 })
 
+Page2.Slider({
+    Text = "Farm Amount (rec max for overnight grinding)",
+    Callback = function(value)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = value
+    end,
+    Min = 1,
+    Max = 100000000000000000000,
+    Def = 1
+})
 
 Page.Toggle({
     Text = "Auto Collect Heads",
@@ -252,7 +261,7 @@ Page2.TextField({
 Page2.Button({
     Text = "(CLIENT) Get Amount",
     Callback = function()
-game:GetService("Players").shafto10.PlayerGui.HUD.HeadCount.Value = _G.headam2
+game.Players.LocalPlayer.PlayerGui.HUD.HeadCount.Value = _G.headam2
     end
 })
 
