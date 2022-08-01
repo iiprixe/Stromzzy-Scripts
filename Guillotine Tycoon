@@ -189,18 +189,36 @@ end)
 Page.Toggle({
     Text = "Auto Collect Prize",
     Callback = function(value)
-           getgenv().autocollectp = value
+getgenv().autocollectp = false 
+
+for i = 1,9999999999999999999999999999999999999 do 
+
 spawn(function()
 while autocollectp == true do
-    wait()
-for i = 1,9999999999999999999999999999 do -- Change 100 to the amount of times you want the script to repeat
-    local Prize = game:GetService("Workspace").Plots[_G.plot].SuperPrize.TouchPart
-    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-    Prize.CFrame = plr.CFrame
-    wait()
+local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+
+local prize = game:GetService("Workspace").Plots[_G.plot].SuperPrize:FindFirstChild('TouchPart')
+
+prize.CFrame = plr.CFrame
+
+if prize ~= nil then
+    if game:GetService("Workspace").Plots[_G.plot].SuperPrize.TouchPart then
+        prize.CFrame = plr.CFrame
+    end
 end
+
+if prize ~= nil then
+local i = game:GetService("Workspace").Plots[_G.plot].SuperPrize.TouchPart
+
+if i.Name == 'TouchPart' then
+    prize.CFrame = plr.CFrame
+end
+end
+wait()
 end
 end)
+    wait()
+end
     end,
     Enabled = false
 })
