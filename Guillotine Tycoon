@@ -1,0 +1,271 @@
+getgenv().heads = false
+getgenv().autocollect = false
+getgenv().autocollectp = false
+getgenv().autofarm = false
+getgenv().auto = false
+
+local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/MaterialLua/master/Module.lua"))()
+
+local UI = Material.Load({
+     Title = "By Stormzzy: Guillotine Tycoon : Stormzzy#4968",
+     Style = 1,
+     SizeX = 400,
+     SizeY = 350,
+     Theme = "Dark"
+})
+
+local Page = UI.New({
+    Title = "Farm"
+})
+
+local Page2 = UI.New({
+    Title = "Misc"
+})
+
+Page.Button({
+    Text = "Copy Discord Invite!",
+    Callback = function()
+        setclipboard("https://discord.gg/j8j6ych3QE")
+local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/Jxereas/UI-Libraries/main/notification_gui_library.lua", true))()
+
+Notification.new("success", "Discord", "Discord Invite Copied To Clipboard") 
+wait(4)
+game:GetService("CoreGui").notifications:remove(true)
+    end
+})
+
+Page.Dropdown({
+    Text = "Choose Your plot (needed)",
+    Callback = function(value)
+        _G.plot = value
+    end,
+    Options = {"Plot1", "Plot2", "Plot3", "Plot4", "Plot5", "Plot6"}
+})
+
+Page.Toggle({
+    Text = "Anti AFK",
+    Callback = function(value)
+local VirtualUser=game:service'VirtualUser'
+game:service'Players'.LocalPlayer.Idled:connect(function()
+VirtualUser:CaptureController()
+VirtualUser:ClickButton2(Vector2.new())
+end)
+    end,
+    Enabled = false
+})
+
+Page.Toggle({
+    Text = "Auto Farm",
+    Callback = function(value)
+    tog = value
+  getgenv().autofarm = tog
+spawn(function()
+while autofarm == true do
+        wait(_G.farmsp)
+for i = 1,9999999999999999999999999999999999999 do 
+    wait()
+local TweenService = game:GetService("TweenService")
+
+local tweenInfo = TweenInfo.new(
+	_G.farmsp, -- Time
+	Enum.EasingStyle.Linear, -- EasingStyle
+	Enum.EasingDirection.Out, -- EasingDirection
+	0, -- RepeatCount (when less than zero the tween will loop indefinitely)
+	false, -- Reverses (tween will reverse once reaching it's goal)
+	0 -- DelayTime
+)
+
+local tween1 = TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, tweenInfo, {CFrame = game:GetService("Workspace").Plots[_G.plot].Activator.CFrame})
+local tween2 = TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, tweenInfo, {CFrame = game:GetService("Workspace").Plots[_G.plot].DepositStep.CFrame})
+local tween3 = TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, tweenInfo, {CFrame = game:GetService("Workspace").Plots[_G.plot].PurchaseButton.CFrame})
+
+tween1:Play()
+wait(_G.farmsp)
+tween2:Play()
+wait(_G.farmsp)
+tween3:Play()
+wait(_G.farmsp)
+tween1:Play()
+
+for i = 1,9999999999999999999999999999999999999 do 
+    
+spawn(function()
+while autofarm == true do
+local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+
+local head = game:GetService("Workspace").Plots[_G.plot].Heads:FindFirstChild('Head')
+
+head.CFrame = plr.CFrame
+
+if head ~= nil then
+    if game:GetService("Workspace").Plots[_G.plot].Heads then
+        head.CFrame = plr.CFrame
+    end
+end
+
+if head ~= nil then
+local i = game:GetService("Workspace").Plots[_G.plot].Heads.Head
+
+if i.Name == 'Head' then
+    head.CFrame = plr.CFrame
+end
+end
+wait()
+end
+end)
+    wait()
+end end end end)
+    end,
+    Enabled = false
+})
+
+Page.Slider({
+    Text = "Farm Speed",
+    Callback = function(value)
+    _G.farmsp = value
+    end,
+    Min = 1,
+    Max = 10,
+    Def = 1
+})
+
+
+Page.Toggle({
+    Text = "Auto Collect Heads",
+    Callback = function(value)
+  getgenv().autocollect = value
+spawn(function()
+while autocollect == true do
+        wait(2)
+local TweenService = game:GetService("TweenService")
+
+local tweenInfo = TweenInfo.new(
+	0, -- Time
+	Enum.EasingStyle.Linear, -- EasingStyle
+	Enum.EasingDirection.Out, -- EasingDirection
+	0, -- RepeatCount (when less than zero the tween will loop indefinitely)
+	false, -- Reverses (tween will reverse once reaching it's goal)
+	0 -- DelayTime
+)
+
+local tween1 = TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, tweenInfo, {CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame})
+
+tween1:Play()
+
+for i = 1,9999999999999999999999999999999999999 do 
+spawn(function()
+while autocollect == true do
+local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+
+local head = game:GetService("Workspace").Plots[_G.plot].Heads:FindFirstChild('Head')
+
+head.CFrame = plr.CFrame
+
+if head ~= nil then
+    if game:GetService("Workspace").Plots[_G.plot].Heads then
+        head.CFrame = plr.CFrame
+    end
+end
+
+if head ~= nil then
+local i = game:GetService("Workspace").Plots[_G.plot].Heads.Head
+
+if i.Name == 'Head' then
+    head.CFrame = plr.CFrame
+end
+end
+wait()
+end
+end)
+    wait()
+end
+
+end
+end)
+    end,
+    Enabled = false
+})
+
+Page.Toggle({
+    Text = "Auto Collect Prize",
+    Callback = function(value)
+           getgenv().autocollectp = value
+spawn(function()
+while autocollectp == true do
+    wait()
+for i = 1,9999999999999999999999999999 do -- Change 100 to the amount of times you want the script to repeat
+    local Prize = game:GetService("Workspace").Plots[_G.plot].SuperPrize.TouchPart
+    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+    Prize.CFrame = plr.CFrame
+    wait()
+end
+end
+end)
+    end,
+    Enabled = false
+})
+
+Page2.Slider({
+    Text = "WS/WalkSpeed",
+    Callback = function(value)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
+    end,
+    Min = 16,
+    Max = 100,
+    Def = 16
+})
+
+Page2.Slider({
+    Text = "JP/JumpPower",
+    Callback = function(value)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = value
+    end,
+    Min = 50,
+    Max = 100,
+    Def = 50
+})
+
+Page2.TextField({
+    Text = "(CLIENT) Head Chop Amount",
+    Callback = function(value)
+        _G.headam = value
+    end
+})
+
+Page2.Button({
+    Text = "(CLIENT) Get Amount",
+    Callback = function()
+local ohNumber1 = _G.headam
+local ohColor32 = Color3.new(1, 1, 0)
+
+game:GetService("Players").LocalPlayer.PlayerGui.PickupFX:Fire(ohNumber1, ohColor32)  
+    end
+})
+
+Page2.TextField({
+    Text = "(CLIENT) Head Amount",
+    Callback = function(value)
+        _G.headam2 = value
+    end
+})
+
+Page2.Button({
+    Text = "(CLIENT) Get Amount",
+    Callback = function()
+game:GetService("Players").shafto10.PlayerGui.HUD.HeadCount.Value = _G.headam2
+    end
+})
+
+Page.Toggle({
+    Text = "Auto Buy Guillotine",
+    Callback = function(bool)
+        getgenv().auto = bool
+        spawn(function()
+            while auto == true do
+                wait()
+            game:GetService("ReplicatedStorage").PurchaseGuillotine:FireServer()
+        end
+    end)
+    end,
+    Enabled = false,
+})
